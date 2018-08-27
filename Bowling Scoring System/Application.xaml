@@ -1,0 +1,9 @@
+﻿<Application x:Class="Application"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Bowling_Scoring_System"
+    StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <FontFamily x:Key="NotoSans">pack://application:,,,/Resources/#abel-regular</FontFamily>
+    </Application.Resources>
+</Application>
