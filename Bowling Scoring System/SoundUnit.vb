@@ -5,7 +5,7 @@ Public Class SoundUnit
     Private WithEvents musicPlayer As New MediaPlayer()
 
     Private SFX_VOLUME As Double = 0.4
-    Private MUSIC_VOLUME As Double = 0.18
+    Private MUSIC_VOLUME As Double = 0.14
 
     Private muted As Boolean
     Public ReadOnly Property isMuted As Boolean
