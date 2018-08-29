@@ -287,7 +287,15 @@ Public Class Row
 
             Dim achievedSpare As Boolean = False
             If score + currentFrameScore >= 10 Then
-                achievedSpare = True
+                If IsCurrFrameThreeBowl Then
+                    If frames(currentFrame).bowlsMade < 2 Then
+                        achievedSpare = True
+                    Else
+                        achievedSpare = False
+                    End If
+                Else
+                    achievedSpare = True
+                End If
             End If
 
             ' If current frame has been cleared
