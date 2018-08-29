@@ -76,6 +76,7 @@
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
     <Compile Include="Row.vb" />
+    <Compile Include="SoundUnit.vb" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -202,6 +203,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\animationEnabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pinsFalling.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\soundDisable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\soundEnable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backingMusic.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

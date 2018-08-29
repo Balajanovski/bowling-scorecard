@@ -2,6 +2,8 @@
 Imports System.Resources
 
 Class MainWindow
+    Private sound As New SoundUnit()
+
     Private NumRows As Integer
     Private Rows As List(Of Row) = New List(Of Row)
 
@@ -120,52 +122,55 @@ Class MainWindow
             Dim changeInHeight As Single = Frame.FRAME_HEIGHT
 
             grid.Height -= changeInHeight
-            Height -= changeInHeight
-            scrollViewer.Height -= changeInHeight
-            AddPlayerButton.Margin = New Thickness(AddPlayerButton.Margin.Left,
-                                                    AddPlayerButton.Margin.Top - changeInHeight,
-                                                    AddPlayerButton.Margin.Right,
-                                                    AddPlayerButton.Margin.Bottom)
-            RemovePlayerButton.Margin = New Thickness(RemovePlayerButton.Margin.Left,
-                                                    RemovePlayerButton.Margin.Top - changeInHeight,
-                                                    RemovePlayerButton.Margin.Right,
-                                                    RemovePlayerButton.Margin.Bottom)
-            StartGameButton.Margin = New Thickness(StartGameButton.Margin.Left,
-                                                    StartGameButton.Margin.Top - changeInHeight,
-                                                    StartGameButton.Margin.Right,
-                                                    StartGameButton.Margin.Bottom)
-            ScoreTextBox.Margin = New Thickness(ScoreTextBox.Margin.Left,
-                                                ScoreTextBox.Margin.Top - changeInHeight,
-                                                ScoreTextBox.Margin.Right,
-                                                ScoreTextBox.Margin.Bottom)
-            NextBowlButton.Margin = New Thickness(NextBowlButton.Margin.Left,
-                                                NextBowlButton.Margin.Top - changeInHeight,
-                                                NextBowlButton.Margin.Right,
-                                                NextBowlButton.Margin.Bottom)
-            ScoreFeedback.Margin = New Thickness(ScoreFeedback.Margin.Left,
-                                                ScoreFeedback.Margin.Top - changeInHeight,
-                                                ScoreFeedback.Margin.Right,
-                                                ScoreFeedback.Margin.Bottom)
-            ValidationCross.Margin = New Thickness(ValidationCross.Margin.Left,
-                                                ValidationCross.Margin.Top - changeInHeight,
-                                                ValidationCross.Margin.Right,
-                                                ValidationCross.Margin.Bottom)
-            bottomBorder.Margin = New Thickness(bottomBorder.Margin.Left,
-                                                bottomBorder.Margin.Top - changeInHeight,
-                                                bottomBorder.Margin.Right,
-                                                bottomBorder.Margin.Bottom)
-            winnerLabel.Margin = New Thickness(winnerLabel.Margin.Left,
-                                                winnerLabel.Margin.Top - changeInHeight,
-                                                winnerLabel.Margin.Right,
-                                                winnerLabel.Margin.Bottom)
-            PlayAgainButton.Margin = New Thickness(PlayAgainButton.Margin.Left,
-                                                PlayAgainButton.Margin.Top - changeInHeight,
-                                                PlayAgainButton.Margin.Right,
-                                                PlayAgainButton.Margin.Bottom)
-            animationImage.Margin = New Thickness(animationImage.Margin.Left,
-                                                scrollViewer.Margin.Top - (changeInHeight / 2),
-                                                animationImage.Margin.Right,
-                                                animationImage.Margin.Bottom)
+
+            If NumRows <= ROWS_TILL_SCROLL Then
+                Height -= changeInHeight
+                scrollViewer.Height -= changeInHeight
+                AddPlayerButton.Margin = New Thickness(AddPlayerButton.Margin.Left,
+                                                        AddPlayerButton.Margin.Top - changeInHeight,
+                                                        AddPlayerButton.Margin.Right,
+                                                        AddPlayerButton.Margin.Bottom)
+                RemovePlayerButton.Margin = New Thickness(RemovePlayerButton.Margin.Left,
+                                                        RemovePlayerButton.Margin.Top - changeInHeight,
+                                                        RemovePlayerButton.Margin.Right,
+                                                        RemovePlayerButton.Margin.Bottom)
+                StartGameButton.Margin = New Thickness(StartGameButton.Margin.Left,
+                                                        StartGameButton.Margin.Top - changeInHeight,
+                                                        StartGameButton.Margin.Right,
+                                                        StartGameButton.Margin.Bottom)
+                ScoreTextBox.Margin = New Thickness(ScoreTextBox.Margin.Left,
+                                                    ScoreTextBox.Margin.Top - changeInHeight,
+                                                    ScoreTextBox.Margin.Right,
+                                                    ScoreTextBox.Margin.Bottom)
+                NextBowlButton.Margin = New Thickness(NextBowlButton.Margin.Left,
+                                                    NextBowlButton.Margin.Top - changeInHeight,
+                                                    NextBowlButton.Margin.Right,
+                                                    NextBowlButton.Margin.Bottom)
+                ScoreFeedback.Margin = New Thickness(ScoreFeedback.Margin.Left,
+                                                    ScoreFeedback.Margin.Top - changeInHeight,
+                                                    ScoreFeedback.Margin.Right,
+                                                    ScoreFeedback.Margin.Bottom)
+                ValidationCross.Margin = New Thickness(ValidationCross.Margin.Left,
+                                                    ValidationCross.Margin.Top - changeInHeight,
+                                                    ValidationCross.Margin.Right,
+                                                    ValidationCross.Margin.Bottom)
+                bottomBorder.Margin = New Thickness(bottomBorder.Margin.Left,
+                                                    bottomBorder.Margin.Top - changeInHeight,
+                                                    bottomBorder.Margin.Right,
+                                                    bottomBorder.Margin.Bottom)
+                winnerLabel.Margin = New Thickness(winnerLabel.Margin.Left,
+                                                    winnerLabel.Margin.Top - changeInHeight,
+                                                    winnerLabel.Margin.Right,
+                                                    winnerLabel.Margin.Bottom)
+                PlayAgainButton.Margin = New Thickness(PlayAgainButton.Margin.Left,
+                                                    PlayAgainButton.Margin.Top - changeInHeight,
+                                                    PlayAgainButton.Margin.Right,
+                                                    PlayAgainButton.Margin.Bottom)
+                animationImage.Margin = New Thickness(animationImage.Margin.Left,
+                                                    scrollViewer.Margin.Top - (changeInHeight / 2),
+                                                    animationImage.Margin.Right,
+                                                    animationImage.Margin.Bottom)
+            End If
 
             NumRows -= 1
 
@@ -211,6 +216,9 @@ Class MainWindow
         defaultWinnerLabelMargin = winnerLabel.Margin
         defaultPlayAgainMargin = PlayAgainButton.Margin
         defaultAnimationImageMargin = animationImage.Margin
+
+        ' Start music
+        sound.playMusic()
 
     End Sub
 
@@ -265,39 +273,51 @@ Class MainWindow
                 animationImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/spare.png"))
                 animationImage.BeginAnimation(Image.OpacityProperty, fadeInOutAnimation)
             Case Row.SpecialScores.Strike
+                sound.playPinsFalling()
                 animationImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/strike.png"))
                 animationImage.BeginAnimation(Image.OpacityProperty, fadeInOutAnimation)
             Case Row.SpecialScores._Double
+                sound.playPinsFalling()
                 animationImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/double.png"))
                 animationImage.BeginAnimation(Image.OpacityProperty, fadeInOutAnimation)
             Case Row.SpecialScores.Turkey
+                sound.playPinsFalling()
                 animationImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/turkey.png"))
                 animationImage.BeginAnimation(Image.OpacityProperty, fadeInOutAnimation)
             Case Row.SpecialScores.SquareBall
+                sound.playPinsFalling()
                 animationImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/squareBall.png"))
                 animationImage.BeginAnimation(Image.OpacityProperty, fadeInOutAnimation)
             Case Row.SpecialScores.HighFive
+                sound.playPinsFalling()
                 animationImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/highFive.png"))
                 animationImage.BeginAnimation(Image.OpacityProperty, fadeInOutAnimation)
             Case Row.SpecialScores.SixPack
+                sound.playPinsFalling()
                 animationImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/sixPack.png"))
                 animationImage.BeginAnimation(Image.OpacityProperty, fadeInOutAnimation)
             Case Row.SpecialScores.LuckySeven
+                sound.playPinsFalling()
                 animationImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/luckySeven.png"))
                 animationImage.BeginAnimation(Image.OpacityProperty, fadeInOutAnimation)
             Case Row.SpecialScores.Octopus
+                sound.playPinsFalling()
                 animationImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/octopus.png"))
                 animationImage.BeginAnimation(Image.OpacityProperty, fadeInOutAnimation)
             Case Row.SpecialScores.GoldenTurkey
+                sound.playPinsFalling()
                 animationImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/goldenTurkey.png"))
                 animationImage.BeginAnimation(Image.OpacityProperty, fadeInOutAnimation)
             Case Row.SpecialScores.DimeBag
+                sound.playPinsFalling()
                 animationImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/dimeBag.png"))
                 animationImage.BeginAnimation(Image.OpacityProperty, fadeInOutAnimation)
             Case Row.SpecialScores.AcesUp
+                sound.playPinsFalling()
                 animationImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/acesUp.png"))
                 animationImage.BeginAnimation(Image.OpacityProperty, fadeInOutAnimation)
             Case Row.SpecialScores.PerfectGame
+                sound.playPinsFalling()
                 animationImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/perfectGame.png"))
                 animationImage.BeginAnimation(Image.OpacityProperty, fadeInOutAnimation)
         End Select
@@ -456,7 +476,7 @@ Class MainWindow
         AddPlayerButton.Visibility = Visibility.Visible
         StartGameButton.IsEnabled = True
         StartGameButton.Visibility = Visibility.Visible
-        RemovePlayerButton.IsEnabled = True
+        RemovePlayerButton.IsEnabled = False
         RemovePlayerButton.Visibility = Visibility.Visible
 
         ' Set dimensions back to normal
@@ -485,12 +505,24 @@ Class MainWindow
             animationImage.Visibility = Visibility.Collapsed
 
             animationButtonImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/animationDisabled.png"))
-            animationButtonImage.ToolTip = "Click to enable animations"
+            animationButton.ToolTip = "Click to enable animations"
         Else
             animationImage.Visibility = Visibility.Visible
 
             animationButtonImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/animationEnabled.png"))
-            animationButtonImage.ToolTip = "Click to disable animations"
+            animationButton.ToolTip = "Click to disable animations"
+        End If
+    End Sub
+
+    Private Sub soundButton_Click(sender As Object, e As RoutedEventArgs) Handles soundButton.Click
+        sound.toggleMute()
+
+        If sound.isMuted Then
+            soundButtonImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/soundDisable.png"))
+            soundButton.ToolTip = "Click to enable sound"
+        Else
+            soundButtonImage.Source = New BitmapImage(New Uri("pack://application:,,,/Resources/soundEnable.png"))
+            soundButton.ToolTip = "Click to disable sound"
         End If
     End Sub
 End Class

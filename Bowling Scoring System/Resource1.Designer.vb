@@ -115,6 +115,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property backingMusic() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("backingMusic", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend Shared ReadOnly Property borderSegment() As System.Drawing.Bitmap
@@ -195,11 +205,40 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        '''</summary>
+        Friend Shared ReadOnly Property pinsFalling() As System.IO.UnmanagedMemoryStream
+            Get
+                Return ResourceManager.GetStream("pinsFalling", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend Shared ReadOnly Property sixPack() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("sixPack", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend Shared ReadOnly Property soundDisable() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("soundDisable", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend Shared ReadOnly Property soundEnable() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("soundEnable", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

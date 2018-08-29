@@ -45,8 +45,10 @@
         <Image x:Name="animationImage" HorizontalAlignment="Left" Height="96" Margin="229,127,0,0" VerticalAlignment="Top" Width="348" Source="Resources/goldenTurkey.png" Stretch="Fill" Opacity="0"/>
         <Label x:Name="winnerLabel" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,208,0,0" VerticalAlignment="Top" Width="834" FontFamily="/Bowling Scoring System;component/Resources/#Abel" FontSize="24" Background="{x:Null}" Foreground="#FF4A90E2" Visibility="Collapsed"/>
         <Button x:Name="PlayAgainButton" Content="Play Again?" HorizontalAlignment="Left" Height="25" Margin="336,255,0,0" VerticalAlignment="Top" Width="130" IsCancel="True" IsEnabled="False" Visibility="Collapsed"/>
-        <Image x:Name="animationButtonImage" ToolTip="Animations are enabled" HorizontalAlignment="Left" Height="35" Margin="18,38,0,0" VerticalAlignment="Top" Width="35" Source="Resources/animationEnabled.png" Stretch="UniformToFill" RenderTransformOrigin="1.32,0.6"/>
-        <Button x:Name="animationButton" Content="" HorizontalAlignment="Left" Height="40" Margin="16,36,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0"/>
+        <Image x:Name="animationButtonImage" ToolTip="Click to disable animations" HorizontalAlignment="Left" Height="35" Margin="18,38,0,0" VerticalAlignment="Top" Width="35" Source="Resources/animationEnabled.png" RenderTransformOrigin="1.32,0.6" Stretch="Fill"/>
+        <Image x:Name="soundButtonImage" ToolTip="Click to disable sound" HorizontalAlignment="Left" Height="35" Margin="66,38,0,0" VerticalAlignment="Top" Width="35" Source="Resources/soundEnable.png" Stretch="Fill" RenderTransformOrigin="1.32,0.6"/>
+        <Button x:Name="animationButton" ToolTip="Click to disable animations" Content="" HorizontalAlignment="Left" Height="40" Margin="16,36,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0"/>
+        <Button x:Name="soundButton" ToolTip="Click to disable sound" Content="" HorizontalAlignment="Left" Height="40" Margin="61,36,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0" RenderTransformOrigin="1.375,0.975"/>
 
 
     </Grid>
