@@ -178,12 +178,6 @@
   <data name="_double" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\double.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="backingMusic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\backingMusic.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pinsFalling" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\pinsFalling.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="soundDisable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\soundDisable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

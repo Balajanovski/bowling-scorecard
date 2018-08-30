@@ -525,4 +525,8 @@ Class MainWindow
             soundButton.ToolTip = "Click to disable sound"
         End If
     End Sub
+
+    Private Sub MainWindow_Exit() Handles Me.Closing
+        sound.FreeResources()
+    End Sub
 End Class
