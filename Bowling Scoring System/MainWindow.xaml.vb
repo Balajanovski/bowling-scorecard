@@ -174,6 +174,10 @@ Class MainWindow
 
             NumRows -= 1
 
+            If NumRows <= ROWS_TILL_SCROLL Then
+                scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden
+            End If
+
             ' Remove last row
             Rows(Rows.Count - 1).MakeInvisible()
             Rows.RemoveAt(Rows.Count - 1)
