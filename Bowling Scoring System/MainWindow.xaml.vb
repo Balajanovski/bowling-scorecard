@@ -429,26 +429,30 @@ Class MainWindow
     End Sub
 
     Private Sub InputScore()
-        ' If current frame was filled
-        If Rows.ElementAt(CurrentRow).Bowl(CInt(ScoreTextBox.Text)) Then
-            ' Unfocus previous row
-            Rows.ElementAt(CurrentRow).UnFocus()
+        AssessScoreTextboxValidity()
 
-            CurrentRow = CurrentRow + 1
-            If CurrentRow >= Rows.Count Then
-                CurrentRow = 0
+        If NextBowlButton.IsEnabled Then
+            ' If current frame was filled
+            If Rows.ElementAt(CurrentRow).Bowl(CInt(ScoreTextBox.Text)) Then
+                ' Unfocus previous row
+                Rows.ElementAt(CurrentRow).UnFocus()
+
+                CurrentRow = CurrentRow + 1
+                If CurrentRow >= Rows.Count Then
+                    CurrentRow = 0
+                End If
+
+                ' Focus current row
+                Rows.ElementAt(CurrentRow).Focus(System.Windows.Media.Colors.LightSkyBlue)
+
+                If CurrentRow = 0 And Rows.ElementAt(CurrentRow).Filled Then
+                    GameOver()
+                End If
             End If
 
-            ' Focus current row
-            Rows.ElementAt(CurrentRow).Focus(System.Windows.Media.Colors.LightSkyBlue)
-
-            If CurrentRow = 0 And Rows.ElementAt(CurrentRow).Filled Then
-                GameOver()
-            End If
+            ' Clear score textbox contents
+            ScoreTextBox.Text = ""
         End If
-
-        ' Clear score textbox contents
-        ScoreTextBox.Text = ""
     End Sub
 
     Private Sub PlayAgainButton_Click(sender As Object, e As RoutedEventArgs) Handles PlayAgainButton.Click
@@ -467,6 +471,11 @@ Class MainWindow
         ' Make play again button invisible
         PlayAgainButton.IsEnabled = False
         PlayAgainButton.Visibility = Visibility.Collapsed
+
+        ' Make validation elements invisible
+        ValidationCross.Visibility = Visibility.Collapsed
+        ScoreFeedback.Visibility = Visibility.Collapsed
+        ScoreFeedback.Content = ""
 
         ' Clear winner label, and make invisible
         winnerLabel.Content = ""
