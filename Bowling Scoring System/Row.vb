@@ -16,6 +16,7 @@ Public Class SpecialScoreEventArgs
     Private specialScore As Row.SpecialScores
 End Class
 
+
 Public Class Row
     Private Const NUM_FRAMES As Integer = 10
 
@@ -85,6 +86,13 @@ Public Class Row
                 Throw New System.Exception("Attempted to reset bowl score out of bounds")
             End If
         End Set
+    End Property
+
+    Private focused As Boolean
+    Public ReadOnly Property IsFocused As Boolean
+        Get
+            Return focused
+        End Get
     End Property
 
     ' Find out if bowl is in the specified frame
@@ -203,6 +211,7 @@ Public Class Row
         currentFrameScore = 0
         rowFilled = False
         consecutiveStrikes = 0
+        focused = False
 
         ' Create row title WPF display
         titleRect = DirectCast(XamlReader.Parse(titleRectangleTemp), Rectangle)
@@ -251,6 +260,8 @@ Public Class Row
     End Sub
 
     Public Sub Focus(ByVal color As Color)
+        focused = True
+
         titleRect.Fill = New SolidColorBrush(color)
 
         For i = 0 To NUM_FRAMES - 1
@@ -259,6 +270,8 @@ Public Class Row
     End Sub
 
     Public Sub UnFocus()
+        focused = False
+
         titleRect.Fill = New SolidColorBrush(System.Windows.Media.Colors.LightGray)
 
         For i = 0 To NUM_FRAMES - 1

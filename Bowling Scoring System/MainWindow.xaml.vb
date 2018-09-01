@@ -566,7 +566,7 @@ Class MainWindow
     End Sub
 
     Private Sub backButton_Click(sender As Object, e As RoutedEventArgs) Handles backButton.Click
-        Dim result As System.Windows.Forms.DialogResult = MessageBox.Show("By going back you will clear your score" & vbCrLf & "Are you sure you want to go back?",
+        Dim result As System.Windows.Forms.DialogResult = MessageBox.Show("By going back you will reset the game" & vbCrLf & "Are you sure you want to go back?",
                                                       "Go Back?",
                                                       System.Windows.Forms.MessageBoxButtons.YesNo,
                                                       System.Windows.Forms.MessageBoxIcon.Warning,
