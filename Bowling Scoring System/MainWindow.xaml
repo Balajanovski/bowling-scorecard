@@ -47,8 +47,10 @@
         <Button x:Name="PlayAgainButton" Content="Play Again?" HorizontalAlignment="Left" Height="25" Margin="336,255,0,0" VerticalAlignment="Top" Width="130" IsCancel="True" IsEnabled="False" Visibility="Collapsed"/>
         <Image x:Name="animationButtonImage" ToolTip="Click to disable animations" HorizontalAlignment="Left" Height="35" Margin="18,38,0,0" VerticalAlignment="Top" Width="35" Source="Resources/animationEnabled.png" RenderTransformOrigin="1.32,0.6" Stretch="Fill"/>
         <Image x:Name="soundButtonImage" ToolTip="Click to disable sound" HorizontalAlignment="Left" Height="35" Margin="66,38,0,0" VerticalAlignment="Top" Width="35" Source="Resources/soundEnable.png" Stretch="Fill" RenderTransformOrigin="1.32,0.6"/>
+        <Image x:Name="backButtonImage" ToolTip="Click to go back" HorizontalAlignment="Left" Height="38" Margin="115,38,0,0" VerticalAlignment="Top" Width="40" Source="Resources/backButton.png" Stretch="Fill" RenderTransformOrigin="1.32,0.6" IsEnabled="False" Visibility="Collapsed"/>
         <Button x:Name="animationButton" ToolTip="Click to disable animations" Content="" HorizontalAlignment="Left" Height="40" Margin="16,36,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0"/>
         <Button x:Name="soundButton" ToolTip="Click to disable sound" Content="" HorizontalAlignment="Left" Height="40" Margin="61,36,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0" RenderTransformOrigin="1.375,0.975"/>
+        <Button x:Name="backButton" ToolTip="Click to go back to title" Content="" HorizontalAlignment="Left" Height="40" Margin="115,36,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0" RenderTransformOrigin="1.375,0.975" IsEnabled="False" Visibility="Collapsed"/>
 
 
     </Grid>

@@ -282,6 +282,10 @@ Public Class Row
 
     ' Returns if current frame was cleared
     Public Function Bowl(ByVal score As Integer) As Boolean
+        If score < 0 Or score > 10 Then
+            Return False
+        End If
+
         If currentFrame < NUM_FRAMES Then
             rowTotalScore += score
 

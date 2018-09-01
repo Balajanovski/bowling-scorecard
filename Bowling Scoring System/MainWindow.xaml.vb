@@ -1,5 +1,4 @@
 ﻿Imports System.Windows.Media.Animation
-Imports System.Resources
 
 Class MainWindow
     Private sound As New SoundUnit()
@@ -248,6 +247,12 @@ Class MainWindow
         ScoreTextBox.Visibility = Visibility.Visible
         ScoreFeedback.Visibility = Visibility.Visible
 
+        ' Make visible back button
+        backButton.IsEnabled = True
+        backButton.Visibility = Visibility.Visible
+        backButtonImage.IsEnabled = True
+        backButtonImage.Visibility = Visibility.Visible
+
         ' Focus the score textbox
         ScoreTextBox.Focus()
 
@@ -447,6 +452,18 @@ Class MainWindow
     End Sub
 
     Private Sub PlayAgainButton_Click(sender As Object, e As RoutedEventArgs) Handles PlayAgainButton.Click
+        Reset()
+    End Sub
+
+    Private Sub Reset()
+        ' Make textbox invisible
+        ScoreTextBox.Visibility = Visibility.Collapsed
+        ScoreTextBox.IsEnabled = False
+
+        ' Make next bowl button invisible
+        NextBowlButton.Visibility = Visibility.Collapsed
+        NextBowlButton.IsEnabled = False
+
         ' Make play again button invisible
         PlayAgainButton.IsEnabled = False
         PlayAgainButton.Visibility = Visibility.Collapsed
@@ -502,6 +519,11 @@ Class MainWindow
         ' Clear score textbox contents
         ScoreTextBox.Text = ""
 
+        ' Make invisible back button
+        backButton.IsEnabled = False
+        backButton.Visibility = Visibility.Collapsed
+        backButtonImage.IsEnabled = False
+        backButtonImage.Visibility = Visibility.Collapsed
     End Sub
 
     Private Sub animationButton_Click(sender As Object, e As RoutedEventArgs) Handles animationButton.Click
@@ -532,5 +554,17 @@ Class MainWindow
 
     Private Sub MainWindow_Exit() Handles Me.Closing
         sound.FreeResources()
+    End Sub
+
+    Private Sub backButton_Click(sender As Object, e As RoutedEventArgs) Handles backButton.Click
+        Dim result As System.Windows.Forms.DialogResult = MessageBox.Show("By going back you will clear your score" & vbCrLf & "Are you sure you want to go back?",
+                                                      "Go Back?",
+                                                      System.Windows.Forms.MessageBoxButtons.YesNo,
+                                                      System.Windows.Forms.MessageBoxIcon.Warning,
+                                                      System.Windows.Forms.MessageBoxDefaultButton.Button1)
+
+        If result = System.Windows.Forms.DialogResult.Yes Then
+            Reset()
+        End If
     End Sub
 End Class

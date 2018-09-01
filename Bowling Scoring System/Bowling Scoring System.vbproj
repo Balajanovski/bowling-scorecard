@@ -51,6 +51,7 @@
   <ItemGroup>
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System" />
@@ -215,6 +216,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SoundResources\backingMusic.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\backButton.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
