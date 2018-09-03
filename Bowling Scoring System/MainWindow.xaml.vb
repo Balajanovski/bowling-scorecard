@@ -356,20 +356,26 @@ Class MainWindow
         Dim rawScore As String = ScoreTextBox.Text
 
         If rawScore.All(AddressOf Char.IsDigit) And rawScore <> "" Then
-            Dim score As Integer = CInt(rawScore)
-            If score < 0 Or score > 10 Then
+            If rawScore.Length > 2 Then
                 ScoreFeedback.Content = "Input score must be between 0 and 10 inclusive"
                 NextBowlButton.IsEnabled = False
                 ValidationCross.Visibility = Visibility.Visible
             Else
-                If 10 - Rows.ElementAt(CurrentRow).CurrFrameScore >= score Or Rows.ElementAt(CurrentRow).IsCurrFrameThreeBowl Then
-                    ScoreFeedback.Content = ""
-                    NextBowlButton.IsEnabled = True
-                    ValidationCross.Visibility = Visibility.Collapsed
-                Else
-                    ScoreFeedback.Content = "Illegal score. Score sum of frame must equal 10."
+                Dim score As Integer = CInt(rawScore)
+                If score < 0 Or score > 10 Then
+                    ScoreFeedback.Content = "Input score must be between 0 and 10 inclusive"
                     NextBowlButton.IsEnabled = False
                     ValidationCross.Visibility = Visibility.Visible
+                Else
+                    If 10 - Rows.ElementAt(CurrentRow).CurrFrameScore >= score Or Rows.ElementAt(CurrentRow).IsCurrFrameThreeBowl Then
+                        ScoreFeedback.Content = ""
+                        NextBowlButton.IsEnabled = True
+                        ValidationCross.Visibility = Visibility.Collapsed
+                    Else
+                        ScoreFeedback.Content = "Illegal score. Score sum of frame must equal 10."
+                        NextBowlButton.IsEnabled = False
+                        ValidationCross.Visibility = Visibility.Visible
+                    End If
                 End If
             End If
         ElseIf rawScore = "" Then

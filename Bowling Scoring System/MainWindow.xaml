@@ -34,7 +34,7 @@
         <Button x:Name="RemovePlayerButton" Content="Remove Player" HorizontalAlignment="Left" Height="25" Margin="570,248,0,0" VerticalAlignment="Top" Width="130" IsEnabled="False"/>
         <Button x:Name="StartGameButton" ToolTip="Shortcut: Enter" Content="Start Game" HorizontalAlignment="Left" Height="25" Margin="336,248,0,0" VerticalAlignment="Top" Width="130"/>
         <Button x:Name="NextBowlButton" ToolTip="Shortcut: Enter" Content="Next Bowl" HorizontalAlignment="Left" Height="25" Margin="336,265,0,0" VerticalAlignment="Top" Width="130" IsEnabled="False" Foreground="Black" Visibility="Collapsed"/>
-        <TextBox x:Name="ScoreTextBox" HorizontalAlignment="Left" Height="25" Margin="336,235,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" IsEnabled="False" Visibility="Collapsed"/>
+        <TextBox x:Name="ScoreTextBox" MaxLength="15" HorizontalAlignment="Left" Height="25" Margin="336,235,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" IsEnabled="False" Visibility="Collapsed"/>
         <Label x:Name="ScoreFeedback" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="31" Margin="229,204,0,0" VerticalAlignment="Top" Width="348" IsEnabled="False" Foreground="#FFFF2929"/>
         <Image x:Name="ValidationCross" HorizontalAlignment="Left" Height="25" Margin="293,240,0,0" VerticalAlignment="Top" Width="25" Source="Resources/cross-icon.png" Visibility="Collapsed">
             <Image.Effect>
@@ -50,7 +50,7 @@
         <Image x:Name="backButtonImage" ToolTip="Click to go back" HorizontalAlignment="Left" Height="38" Margin="115,38,0,0" VerticalAlignment="Top" Width="40" Source="Resources/backButton.png" Stretch="Fill" RenderTransformOrigin="1.32,0.6" IsEnabled="False" Visibility="Collapsed"/>
         <Button x:Name="animationButton" ToolTip="Click to disable animations" Content="" HorizontalAlignment="Left" Height="40" Margin="16,36,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0"/>
         <Button x:Name="soundButton" ToolTip="Click to disable sound" Content="" HorizontalAlignment="Left" Height="40" Margin="61,36,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0" RenderTransformOrigin="1.375,0.975"/>
-        <Button x:Name="backButton" ToolTip="Click to go back to title" Content="" HorizontalAlignment="Left" Height="40" Margin="115,36,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0" RenderTransformOrigin="1.375,0.975" IsEnabled="False" Visibility="Collapsed"/>
+        <Button x:Name="backButton" ToolTip="Click to go back to title" Content="" HorizontalAlignment="Left" Height="40" Margin="106,36,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0" RenderTransformOrigin="1.375,0.975" IsEnabled="False" Visibility="Collapsed"/>
 
 
     </Grid>
