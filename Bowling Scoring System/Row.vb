@@ -161,10 +161,14 @@ Public Class Row
     End Property
 
     ' Get row title
-    Public ReadOnly Property Title() As String
+    Public Property Title() As String
         Get
             Return titleTextBox.Text
         End Get
+        Set(value As String)
+            titleTextBox.Text = value
+            titleLabel.Content = value
+        End Set
     End Property
 
     ' Total scores of all the fully filled frames summed together
