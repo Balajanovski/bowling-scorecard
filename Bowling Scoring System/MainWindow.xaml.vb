@@ -8,9 +8,14 @@ Class MainWindow
     Private NumRows As Integer
     Private Rows As List(Of Row) = New List(Of Row)
 
+    Private updatedSinceLastSave As Boolean
+
     ' Stores all valid inputs made
     ' so games can be saved and loaded
     Private ValidInputsMade As List(Of Integer) = New List(Of Integer)
+
+    ' The window which appears when you press on the help button
+    Private Help As HelpWindow
 
     Private CurrentRow As Integer
 
@@ -202,6 +207,7 @@ Class MainWindow
         NumRows = 1
         CurrentRow = 0
         state = GameState.Setup
+        updatedSinceLastSave = False
 
         Rows.Add(New Row("Player " & CStr(NumRows), FIRST_ROW_X_POS, FIRST_ROW_Y_POS, grid))
         Rows.ElementAt(Rows.Count - 1).FocusRowTitle()
@@ -465,10 +471,13 @@ Class MainWindow
 
             ' Clear score textbox contents
             ScoreTextBox.Text = ""
+            ScoreTextBox.Focus()
         End If
     End Sub
 
     Private Sub InputScore(inputData As String)
+        updatedSinceLastSave = True
+
         ' Store valid score inputs
         ' for file saving functionality
         ValidInputsMade.Add(CInt(inputData))
@@ -528,6 +537,7 @@ Class MainWindow
         NumRows = 1
         CurrentRow = 0
         state = GameState.Setup
+        updatedSinceLastSave = False
 
         ' Create new, default player 1 row
         Rows.Add(New Row("Player " & CStr(NumRows), FIRST_ROW_X_POS, FIRST_ROW_Y_POS, grid))
@@ -602,10 +612,6 @@ Class MainWindow
         End If
     End Sub
 
-    Private Sub MainWindow_Exit() Handles Me.Closing
-        sound.FreeResources()
-    End Sub
-
     Private Sub backButton_Click(sender As Object, e As RoutedEventArgs) Handles backButton.Click
         Dim result As System.Windows.Forms.DialogResult = MessageBox.Show("By going back you will start a new game" & vbCrLf & "Are you sure you want to go back?",
                                                       "Go Back?",
@@ -627,6 +633,18 @@ Class MainWindow
     End Sub
 
     Private Sub loadButton_Click(sender As Object, e As RoutedEventArgs) Handles loadButton.Click
+        If updatedSinceLastSave Then
+            Dim result As System.Windows.Forms.DialogResult = MessageBox.Show("You are about to overwrite an existing game without saving" _
+                & vbCrLf & "Are you sure you want to proceed",
+                                                      "Overwrite Existing Game?",
+                                                      System.Windows.Forms.MessageBoxButtons.YesNo,
+                                                      System.Windows.Forms.MessageBoxIcon.Question,
+                                                      System.Windows.Forms.MessageBoxDefaultButton.Button1)
+            If result = System.Windows.Forms.DialogResult.No Then
+                Exit Sub
+            End If
+        End If
+
         Dim fileDialogue As System.Windows.Forms.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
         Dim strFileName As String
 
@@ -646,12 +664,14 @@ Class MainWindow
             ' Ensure it is valid
             If numPlayersStr Is Nothing Or Not numPlayersStr.All(AddressOf Char.IsDigit) Or numPlayersStr = "" Then
                 ErrorOnFileLoad()
+                reader.Close()
                 Exit Sub
             End If
             Dim numPlayers As Integer = CInt(numPlayersStr)
             ' Cannot have 0 or less players
             If numPlayers <= 0 Then
                 ErrorOnFileLoad()
+                reader.Close()
                 Exit Sub
             End If
 
@@ -664,6 +684,7 @@ Class MainWindow
                 ' Ensure it is valid
                 If currentLine Is Nothing Or currentLine = "" Then
                     ErrorOnFileLoad()
+                    reader.Close()
                     Exit Sub
                 End If
 
@@ -679,6 +700,7 @@ Class MainWindow
                 ' Ensure raw input is valid
                 If Not Regex.IsMatch(rawInputScores, "^[0-9,]+$") Then
                     ErrorOnFileLoad()
+                    reader.Close()
                     Exit Sub
                 End If
 
@@ -689,12 +711,14 @@ Class MainWindow
                 For Each score In scores
                     If score > 10 Or score < 0 Then
                         ErrorOnFileLoad()
+                        reader.Close()
                         Exit Sub
                     End If
                 Next
                 ' Ensure that there are not so many scores that it overflows
                 If scores.Count > MAX_NUM_BOWLS_PER_ROW * numPlayers Then
                     ErrorOnFileLoad()
+                    reader.Close()
                     Exit Sub
                 End If
             End If
@@ -718,10 +742,14 @@ Class MainWindow
             For Each score In scores
                 InputScore(score)
             Next
+
+            updatedSinceLastSave = False
         End If
     End Sub
 
     Private Sub saveButton_Click(sender As Object, e As RoutedEventArgs) Handles saveButton.Click
+        updatedSinceLastSave = False
+
         If ValidInputsMade.Count <= 0 Then
             Dim result As System.Windows.Forms.DialogResult = MessageBox.Show("You are saving an empty game" & vbCrLf & "Are you sure you want to save an empty game?",
                                                       "Save Empty Game?",
@@ -766,10 +794,32 @@ Class MainWindow
             writer.Close()
 
             MessageBox.Show("Game successfully saved",
-                                                      "Save successful",
-                                                      System.Windows.Forms.MessageBoxButtons.OK,
-                                                      System.Windows.Forms.MessageBoxIcon.Information,
-                                                      System.Windows.Forms.MessageBoxDefaultButton.Button1)
+                            "Save successful",
+                            System.Windows.Forms.MessageBoxButtons.OK,
+                            System.Windows.Forms.MessageBoxIcon.Information,
+                            System.Windows.Forms.MessageBoxDefaultButton.Button1)
         End If
+    End Sub
+
+    Private Sub Window_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs)
+        If updatedSinceLastSave Then
+            Dim result As System.Windows.Forms.DialogResult = MessageBox.Show("You are about to exit without saving" _
+                & vbCrLf & "Are you sure you want to proceed",
+                                                      "Exit Without Saving?",
+                                                      System.Windows.Forms.MessageBoxButtons.YesNo,
+                                                      System.Windows.Forms.MessageBoxIcon.Question,
+                                                      System.Windows.Forms.MessageBoxDefaultButton.Button1)
+            If result = System.Windows.Forms.DialogResult.No Then
+                e.Cancel = True
+            Else
+                e.Cancel = False
+                sound.FreeResources()
+            End If
+        End If
+    End Sub
+
+    Private Sub helpButton_Click(sender As Object, e As RoutedEventArgs) Handles helpButton.Click
+        Help = New HelpWindow()
+        Help.ShowDialog()
     End Sub
 End Class

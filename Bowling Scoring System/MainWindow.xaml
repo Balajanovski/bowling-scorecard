@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bowling_Scoring_System"
         mc:Ignorable="d"
+        Closing="Window_Closing"
         Title="Bowling Score System" Height="360" Width="840" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <Grid>
@@ -50,11 +51,13 @@
         <Image x:Name="backButtonImage" ToolTip="Click to go back to title" HorizontalAlignment="Left" Height="38" Margin="221,38,0,0" VerticalAlignment="Top" Width="40" Source="Resources/backButton.png" Stretch="Fill" RenderTransformOrigin="1.32,0.6" IsEnabled="False" Visibility="Collapsed"/>
         <Image x:Name="saveButtonImage" ToolTip="Click to save game" HorizontalAlignment="Left" Height="28" Margin="172,43,0,0" VerticalAlignment="Top" Width="30" Source="Resources/saveButton.png" RenderTransformOrigin="1.32,0.6" IsEnabled="False" Stretch="Fill" Visibility="Collapsed"/>
         <Image x:Name="loadButtonImage" ToolTip="Click to load game" HorizontalAlignment="Left" Height="38" Margin="115,38,0,0" VerticalAlignment="Top" Width="40" Source="Resources/loadButton.png" Stretch="Fill" RenderTransformOrigin="1.32,0.6" IsEnabled="False"/>
+        <Image x:Name="helpButtonImage" ToolTip="Click to seek help" HorizontalAlignment="Left" Height="38" Margin="773,35,0,0" VerticalAlignment="Top" Width="40" Source="Resources/helpButton.png" Stretch="Fill" RenderTransformOrigin="1.32,0.6" IsEnabled="False"/>
         <Button x:Name="animationButton" ToolTip="Click to disable animations" Content="" HorizontalAlignment="Left" Height="40" Margin="16,36,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0"/>
         <Button x:Name="soundButton" ToolTip="Click to disable sound" Content="" HorizontalAlignment="Left" Height="40" Margin="61,36,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0" RenderTransformOrigin="1.375,0.975"/>
         <Button x:Name="backButton" ToolTip="Click to go back to title" Content="" HorizontalAlignment="Left" Height="40" Margin="221,37,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0" RenderTransformOrigin="1.375,0.975" IsEnabled="False" Visibility="Collapsed"/>
         <Button x:Name="saveButton" ToolTip="Click to save game" Content="" HorizontalAlignment="Left" Height="40" Margin="166,37,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0" RenderTransformOrigin="1.375,0.975" IsEnabled="False" Visibility="Collapsed"/>
-        <Button x:Name="loadButton" ToolTip="Click to load game" Content="" HorizontalAlignment="Left" Height="40" Margin="106,36,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0" RenderTransformOrigin="1.375,0.975" IsEnabled="True"/>
+        <Button x:Name="loadButton" ToolTip="Click to load game" Content="" HorizontalAlignment="Left" Height="40" Margin="115,38,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0" RenderTransformOrigin="1.375,0.975" IsEnabled="True"/>
+        <Button x:Name="helpButton" ToolTip="Click to seek help" Content="" HorizontalAlignment="Left" Height="40" Margin="773,33,0,0" VerticalAlignment="Top" Width="40" Background="{x:Null}" BorderBrush="#FF707070" Foreground="{x:Null}" Opacity="0" RenderTransformOrigin="1.375,0.975" IsEnabled="True"/>
 
 
     </Grid>
